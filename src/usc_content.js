@@ -13,19 +13,20 @@ if (window == top) {
 var findCites = function() {
     var re = /(\d+)\s*U\.S\.C\.[ §]*([0-9]+(?:[a-z]{2})?)/mg;
     var node = document.body;
-    var done = false;
-
     var cites = Array();
 
     for (var i = 0; i < node.childNodes.length; ++i) {
         var child = node.childNodes[i];
-        var match = child.textContent.match(re);
-        if (match) {
-            cites.push(match);
+        var matches = child.textContent.match(re);
+        if (matches) {
+            for	(index = 0; index < matches.length; index++) {
+                console.log("saw: " + matches[index])
+                cites.push(matches[index]);
+            }
         }
     }
-    console.log(cites[0])
+    console.log("cites")
+    console.log("saw " + cites.length + " citations.")
     console.log(cites)
     return cites;
-    
 }
