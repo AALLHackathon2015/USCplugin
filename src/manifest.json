@@ -1,0 +1,21 @@
+{
+  "name": "USCplugin",
+  "version": "0.0.1",
+  "description": "Locates U.S.C cites and identifies if its updated.",
+  "icons": { "128": "icon.png" },
+  "background": { "scripts": ["background.js"] },
+  "content_scripts": [
+    { "matches": ["https://scholar.google.com/*"], "js": ["usc_content.js"] }
+  ],
+  "permissions": [
+    "tabs",
+    "https://maps.google.com/*",
+    "https://maps.googleapis.com/*"
+  ],
+  "page_action": {
+      "default_name": "Display Map",
+      "default_icon": "marker.png",
+      "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}
