@@ -15,19 +15,12 @@ var findDate = function() {
     var title = document.title;
     //var done = false;
 
-    var dates = Array();
+    var date = null;
 
-        var result = re.exec(title);
-            if (result) {
-                dates.push(result[1])
-                }
-        //var match = title.match(re);
-        //if (match) {
-          //  dates.push(match);
-        //}
-    
-    console.log(dates[0])
-    console.log(dates)
-    return dates;
-    
+    var result = re.exec(title);
+    if (result) {
+        date = result[1]
+    }
+    console.log("The date of the case is: " + date);
+    return date
 }
