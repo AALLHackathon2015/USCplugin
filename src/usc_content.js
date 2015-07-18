@@ -1,8 +1,5 @@
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
+// usc_content.js: extracts out U.S.C. site in Chromium
 
-// The background page is asking us to find an address on the page.
 if (window == top) {
   chrome.extension.onRequest.addListener(function(req, sender, sendResponse) {
     sendResponse(findCites());
@@ -11,7 +8,11 @@ if (window == top) {
 
 // Search the text nodes for a U.S.C. citation
 var findCites = function() {
-    var re = /(\d+)\s*U\.S\.C\.[ §]*([0-9]+(?:[a-z]{2})?)/mg;
+    // not handling 28 U.S.C. § 2244(d)(1)
+    // parenthetical subsections
+    // there are sections with an alphanumeric
+    var re = /(\d+)\s*U\.S\.C\.[ §]*([0-9]+(?:[a-z]{2})?)/g;
+    
     var node = document.body;
     var cites = Array();
 
