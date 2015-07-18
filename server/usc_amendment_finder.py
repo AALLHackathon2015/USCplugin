@@ -1,6 +1,6 @@
 ## USC Plug-IN
 ## v. 0.1
-## 7-18-2015 
+## 7-18-2015
 ## python 2.x
 ##
 ## These functions are part of a larger program designed to find
@@ -13,7 +13,7 @@
 ## Process:
 ##
 ## 1st --> inputs the title number, section number, and year of the USC section from the Chrome Google Scholar Plug-in
-## 2nd --> finds the Statute page from the us house website 
+## 2nd --> finds the Statute page from the us house website
 ## 3rd --> searches page and creates list of pub-law numbers on page (list of amendments)
 ## 4th --> compares pub law dates with date of case to determine whether to flag as 'questionable'
 ## 5th --> returns flag, to Google Scholar Plug-in
@@ -33,8 +33,16 @@ year = "1981"
 
 import os #loads os so I can use different directories later.
 import urllib # to search uscode.house.gov for USC pages
- 
-        
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/<volume>/<section>/<year>')
+def execute_cf(volume, section, year):
+    (update_flag, url) = cf(volume, section, year)
+    return '["{0}", "{1}"]'.format(update_flag, url)
+
 def cf(t,s,y): # going to uscode.house.gov to retrieve code section
         amendyear = [] # creates list to store amendment years
         site1 = "http://uscode.house.gov/view.xhtml?hl=false&edition=prelim&req=granuleid%3AUSC-prelim-title" # + title number +
@@ -75,8 +83,6 @@ def cf(t,s,y): # going to uscode.house.gov to retrieve code section
                 else:
                         return True , gpowebsite
 
-                
-        
-        
-    
-
+if __name__ == '__main__':
+    app.debug = True
+    app.run(host='0.0.0.0')
