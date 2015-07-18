@@ -28,7 +28,6 @@ year = "1981"
 
 # sample dictionary of program codes and metrics is being used to develop function which will find the solicitations at nsf
 
-
 ## imported files
 
 import os #loads os so I can use different directories later.
@@ -40,6 +39,8 @@ app = Flask(__name__)
 
 @app.route('/<volume>/<section>/<year>')
 def execute_cf(volume, section, year):
+    """Works for: 18, 28, 35, 38, 39"""
+
     (update_flag, url) = cf(volume, section, year)
     return '["{0}", "{1}"]'.format(update_flag, url)
 
